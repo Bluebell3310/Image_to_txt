@@ -1,4 +1,5 @@
 from PIL import Image
+import time
 
 def image_to_txt(imgName, maxSize):
     # 打開圖片
@@ -20,7 +21,7 @@ def image_to_txt(imgName, maxSize):
     width = img.size[0]
     height = img.size[1]
 
-    # 如果圖片長或寬大於指定數值，則進行圖片縮小，縮放比例依照長或寬最大的那個
+    # 如果圖片寬大於指定數值，則進行圖片縮小
     zoom = 0 # 縮小比率
     if width >= maxSize:
         zoom = width / maxSize
@@ -39,14 +40,8 @@ def image_to_txt(imgName, maxSize):
     index = 0 
     print()
     print('開始進行圖片轉txt程序')
+    print('...')
     for y in range(height):
-        # 顯示處理進度
-        index += 1
-        print('#', end='')
-        if index >= 60:
-            index = 0
-            print()
-        
         for x in range(width):
             pixel = img.getpixel((x, y))
             # print('x= ', x, 'y= ', y, 'pixel= ', pixel)
@@ -56,7 +51,7 @@ def image_to_txt(imgName, maxSize):
                 txt.write('@')
         txt.write('\n')
     
-    print('\n程序執行完成')
+    print('程序執行完成')
     print('檔案儲存為[{}]'.format(namestr))
     txt.close()
     print('保存完成')
