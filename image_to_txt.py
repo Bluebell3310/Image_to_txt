@@ -1,5 +1,4 @@
 from PIL import Image
-import time
 
 def image_to_txt(imgName, maxSize):
     # 打開圖片
@@ -10,9 +9,9 @@ def image_to_txt(imgName, maxSize):
         print("開啟圖片[{}]時出現錯誤".format(imgName))
     
     # 顯示圖片資訊
-    print("圖片資訊: 大小為{}x{}, 格式為{}, 顏色編碼為{}".format(img.size[0], img.size[1], img.format, img.mode))
+    print("圖片資訊: 大小為{}x{}, 格式為{}, 色彩模式為{}".format(img.size[0], img.size[1], img.format, img.mode))
     
-    # 確認顏色編碼是否為RGB，如果不是則轉換
+    # 確認色彩模式是否為RGB，如果不是則轉換
     if img.mode != 'RGB':
         print("圖片顏色編碼不是RGB，進行轉換")    
         img = img.convert('RGB')
@@ -37,7 +36,6 @@ def image_to_txt(imgName, maxSize):
     # 開始轉換程序
     namestr = imgName.split('.')[0] + '.txt'
     txt = open(namestr, 'w')
-    index = 0 
     print()
     print('開始進行圖片轉txt程序')
     print('...')
@@ -46,7 +44,7 @@ def image_to_txt(imgName, maxSize):
             pixel = img.getpixel((x, y))
             # print('x= ', x, 'y= ', y, 'pixel= ', pixel)
             if pixel != 0:
-                txt.write('_')
+                txt.write(' ')
             else:
                 txt.write('@')
         txt.write('\n')
